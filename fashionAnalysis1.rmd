@@ -1,0 +1,43 @@
+---
+title: "A Fashion Analysis (part 1)"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    theme: readable
+    toc: yes
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Introduction
+In today’s world, fashion is evolving ever so quickly and brands (especially fast-fashion giants like Zara) have to keep up by producing new, trendy designs constantly. The aim of this analysis is to learn about some of Zara’s strategies in maintaining its popularity while achieving this. The dataset I will analyze can be downloaded from *https://www.kaggle.com/datasets/fashionworldda/fashion-trend-dataset* and lists hundreds of pieces sold by Zara from 2018 to 2022 with several characteristics such as price, colour, season and pattern. There are 660 rows and 20 columns in the data with 1 double type (price) and approximately an even split between character and integer types. I will explore the highest-rated pieces in various categories eg. season, material in an attempt to find patterns that could help to better understand some of the fashion brands’s strategy. 
+```{r}
+library(tidyverse)
+fashion = read.csv("fashion_data_2018_2022.csv")
+glimpse(fashion)
+```
+
+# Breakdown of Sold Items
+
+```{r}
+ggplot(fashion) + geom_bar(aes(color))
+ggplot(fashion) + geom_bar(aes(pattern))
+ggplot(fashion) + geom_bar(aes(material))
+```
+
+# Highest-Rated Pieces
+
+```{r}
+fashion |> arrange(desc(average_rating))
+
+fashion |>
+	group_by(age_group) |> #could also change to season
+	arrange(desc(average_rating)) #|>
+	#select(important-stuff)
+
+```
+
+# Seasonal trends
+
+# Conclusion
